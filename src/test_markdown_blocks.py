@@ -155,7 +155,8 @@ this is paragraph text
         )
 
     def test_extract_title(self):
-        markdown = """ # Tolkien Fan Club
+        markdown = """ 
+   # Tolkien Fan Club
 
 **I like Tolkien**. Read my [first post here](/majesty) (sorry the link doesn't work yet)
 
