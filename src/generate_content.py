@@ -29,3 +29,21 @@ def generate_page(from_path, template_path, dest_path):
     #Writing to destination
     with open(dest_path, 'w') as dest_file:
         dest_file.write(updated_file)
+
+    
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+    # If the path is a file
+    if os.path.isfile(dir_path_content):
+        if dir_path_content.endswith(".md"):
+            generate_page(dir_path_content, template_path, dest_dir_path.replace(".md", ".html"))
+        return
+    dir_list = os.listdir(dir_path_content)
+    #If the path is not a file
+    for dir in dir_list:
+        current_path = os.path.join(dir_path_content, dir)
+        # Create new destination directory path that mirrors content structure
+        new_dest = os.path.join(dest_dir_path, dir)
+        os.makedirs(new_dest, exist_ok=True)
+        # Recurse with new destination path
+        generate_pages_recursive(current_path, template_path, new_dest)
+
